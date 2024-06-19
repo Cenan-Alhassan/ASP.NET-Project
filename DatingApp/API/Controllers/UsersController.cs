@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore; // added for ToListAsync
 using System.Web;
 
-
 namespace API.Controllers;
-
 
 [ApiController]
 [Route("api/[controller]")] // route will be named https://localhost:5001/api/Users
