@@ -6,13 +6,10 @@ using System.Web;
 
 namespace API.Controllers;
 
-[ApiController]
-[Route("api/[controller]")] // route will be named https://localhost:5001/api/Users
-
-
-public class UsersController : ControllerBase
+// ApiController and route defined in BaseApiController
+public class UsersController : BaseApiController // inherit from a base we created instead of ControlerBase 
 {
-    private readonly DataContext _context;  // create outer private field and assign it the constructor parameter
+    private readonly DataContext _context; 
 
     public UsersController(DataContext context)
     {
