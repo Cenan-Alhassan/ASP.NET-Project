@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    public class AccountController(DataContext context) : BaseApiController // (DataContext context) to replace in-body declaration
+    public class AccountController(DataContext context, ITokenService tokenService) : BaseApiController // (DataContext context) to replace in-body declaration
     {
 
         [HttpPost("register")] // at ...api/acount/register (BaseApiController gives ...api/{controller})
@@ -48,7 +49,7 @@ namespace API.Controllers
         // create a hmac using the salt
         // compare to a hash created using this hmac
         // unauthorized if each byte in array does not match, return user if matches
-        public async Task<ActionResult<AppUser>> Login(LoginDto loginDto)
+        public async Task<ActionResult<UsernameTokenDto>> Login(LoginDto loginDto)
         {
             var user = await context.Users.FirstOrDefaultAsync(x => 
             x.UserName == loginDto.Username.ToLower());
@@ -65,7 +66,12 @@ namespace API.Controllers
             }
 
 
-            return user;
+             return new UsernameTokenDto
+            {
+                Username = user.UserName,
+                Token = tokenService.CreateToken(user)
+            };
+
         }
 
         private async Task<bool> UserExists(string username) // check if user already exists
