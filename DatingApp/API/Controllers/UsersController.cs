@@ -29,7 +29,7 @@ public class UsersController : BaseApiController // inherit from a base we creat
     }
 
 
-    [Authorize] // must provide token in header
+    [Authorize] // must provide token in
     [HttpGet("{id}")]
     
     public async Task <ActionResult<AppUser>> GetUser(int id)
