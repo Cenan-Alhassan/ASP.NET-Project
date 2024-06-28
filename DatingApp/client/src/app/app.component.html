@@ -4,11 +4,16 @@
 
     <h1>{{ title }}</h1>
 
-    <ul>
-        <li *ngFor="let user of users">
-            <!-- allowing looping of list elements through ng (angular) code -->
-            {{ user.id }} - {{ user.userName }}
-        </li>
-    </ul>
+    <!-- <ul>
+        @for (user of users; track user.id) { //angular loop functionality in html
+            <li>
+                {{user.id}} - {{user.userName}}
+            </li>
+        } 
+        
+
+    </ul> -->
+
+    <app-home></app-home>
 
 </div>

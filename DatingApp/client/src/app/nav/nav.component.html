@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Carousel</a>
 
-        @if (isLoggedIn)
+        @if (accountService.currentUser())
         {
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
@@ -20,21 +20,22 @@
         </ul>
         }
 
-        @if (isLoggedIn)
+        @if (accountService.currentUser())
         {
-        <div class="dropdown">
+        <div class="dropdown" dropdown>
             <button class="btn dropdown-toggle text-light" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown">
+                data-toggle="dropdown" dropdownToggle>
                 Welcome User
             </button>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu" *dropdownMenu>
                 <a class="dropdown-item">Edit Profile</a>
+                <div class="divider dropdown-dvider"></div>
                 <a class="dropdown-item" (click) ="logout()">Logout</a>
             </div>
         </div>
         }
 
-        @if (!isLoggedIn)
+        @if (!accountService.currentUser())
         {
         <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex">
             <input name="username" [(ngModel)]="model.username" class="form-control me-2" placeholder="Username" />

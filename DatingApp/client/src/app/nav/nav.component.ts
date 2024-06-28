@@ -1,25 +1,25 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AccountService } from '../_services/account.service';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown'
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, BsDropdownModule],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
 })
 export class NavComponent {
-  private accountService = inject(AccountService)
+  accountService = inject(AccountService)
   model: any = {};
-  isLoggedIn = false;
 
   login() {
     this.accountService.login(this.model).subscribe({
 
       next: response => {
-        console.log(response);
-        this.isLoggedIn = true;
+        console.log("Log in successful. Response: ")
+        console.log(JSON.stringify(response));
       },
 
       error: error => console.log(error)
@@ -29,7 +29,6 @@ export class NavComponent {
 
   logout() {
     
-    this.isLoggedIn = false;
-
+    this.accountService.logout();
   }
 }

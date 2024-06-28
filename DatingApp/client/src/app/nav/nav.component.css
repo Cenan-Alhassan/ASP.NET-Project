@@ -1,0 +1,6 @@
+.dropdown-toggle, .dropdown-divider{
+    cursor: pointer;
+}
+.dropdown-divider{
+    padding-top: 100px;
+}
